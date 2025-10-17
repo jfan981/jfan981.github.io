@@ -1,72 +1,365 @@
 <!DOCTYPE html>
-
-<html>
-    <head> 
-        <title> James Website </title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-
-    <body>
-
-        <div class="navbar">
-            <div>
-                james sullivan
-            </div>
-
-            <div class="text-right">
-                <a href="https://www.linkedin.com/">link to linkedin</a>
-            </div>
-        </div>
-
-        <div class="intro">
-            <!--there are totally 6 fonts h1-h6-->
-            <h1 id="greetings">let's get to know james</h1>
-            <img
-                class="james-photo"
-                src="img/james.jpeg"
-                alt="james' photo">
-            </img>
-        </div>
-
-        <div class="grid-0">
-            <div class="box-0">
-                <h2>about me</h2>
-                <p class="major-box">computer engineering major at <a href="https://www.ucla.edu/">UCLA</a></p>
-                <!--way to add a link-->
-            </div>
-
-            <div>
-                <h2>james' skills</h2>
-                <!-- unordered list -->
-                <ul class="major-box">
-                    <li>able to solder a lot</li>
-                    <li>can creat a robot</li>
-                    <li>knows TCL, Python</li>
-                    <li>good teamwork skills</li>
-                </ul>
-            </div>
-        </div>
-
-        <p class="major-box">
-            contact yogi: jamesjames@gmail.com
-        </p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaelyn Fan | Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and simple colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5', // Indigo 600
+                        'secondary': '#6366f1', // Indigo 500
+                        'background-dark': '#111827', // Gray 900
+                        'card-dark': '#1f2937', // Gray 800
+                        'text-light': '#f3f4f6', // Gray 100
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Custom styles for scrollbar and simple transitions -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         
-
-        <!-- ordered list -->
-        <!--
-        <ol>
-            <li>able to solder a lot</li>
-            <li>can creat a robot</li>
-            <li>knows TCL, Python</li>
-            <li>good teamwork skills</li>
-        </ol>
-        -->
-
+        body {
+            font-family: 'Inter', sans-serif;
+        }
         
-
+        /* Custom scrollbar for better aesthetics */
+        .content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-area::-webkit-scrollbar-track {
+            background: #1f2937; /* card-dark */
+        }
+        .content-area::-webkit-scrollbar-thumb {
+            background: #4f46e5; /* primary */
+            border-radius: 4px;
+        }
+        .content-area::-webkit-scrollbar-thumb:hover {
+            background: #6366f1; /* secondary */
+        }
         
-    </body>
+        /* UI/UX Improvement: Fade-in animation for tab switching */
+        .tab-content {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-text-light min-h-screen p-4 sm:p-8 flex justify-center">
+
+    <div id="portfolio-container" class="w-full max-w-5xl">
+        
+        <!-- Header & Intro (Always Visible) -->
+        <header class="text-center mb-10 p-6 bg-card-dark rounded-xl shadow-2xl">
+            <!-- Profile Photo Placeholder -->
+            <div class="mx-auto w-32 h-32 bg-secondary rounded-full flex items-center justify-center mb-4 border-4 border-primary overflow-hidden">
+                <img src="https://placehold.co/128x128/6366f1/ffffff?text=JF" alt="Jaelyn Fan Profile" onerror="this.src='https://placehold.co/128x128/6366f1/ffffff?text=JF';" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-4xl font-extrabold text-white mb-2">Jaelyn Fan</h1>
+            <p class="text-xl text-primary font-medium">M.S. CS Student at UCLA</p>
+            
+            <!-- Updated Links -->
+            <div class="mt-4 flex justify-center space-x-4 text-sm">
+                <a href="https://www.linkedin.com/in/jaelyn-fan/" target="_blank" class="text-gray-400 hover:text-primary transition duration-300">LinkedIn</a>
+                <a href="https://github.com/jfan981" target="_blank" class="text-gray-400 hover:text-primary transition duration-300">GitHub</a>
+                <a href="mailto:jfan981@ucla.edu" class="text-gray-400 hover:text-primary transition duration-300">jfan981@ucla.edu</a>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-card-dark p-2 rounded-xl shadow-lg mb-6 sticky top-0 z-10">
+            <div class="flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0 sm:space-x-4">
+                <button onclick="showTab('home')" class="tab-button active-tab transition duration-300 ease-in-out">
+                    Home
+                </button>
+                <button onclick="showTab('experience')" class="tab-button transition duration-300 ease-in-out">
+                    Work Experience
+                </button>
+                <button onclick="showTab('projects')" class="tab-button transition duration-300 ease-in-out">
+                    Projects
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area (Scrollable within the page) -->
+        <div id="content-container" class="content-area bg-card-dark p-6 rounded-xl shadow-2xl min-h-[500px] max-h-[calc(100vh-250px)] overflow-y-auto">
+
+            <!-- HOME Tab Content -->
+            <section id="home-tab" class="tab-content block">
+                <h2 class="text-3xl font-bold border-b border-primary pb-3 mb-6">About Me</h2>
+                
+                <div class="text-lg space-y-4 mb-8 text-gray-300">
+                    <p>
+                        I'm a Computer Science Master’s student at UCLA with a strong interest in building real, impactful software. I’ve worked on projects ranging
+                        from AI-powered servers to full-stack web apps, and I enjoy solving problems and learning new systems.
+                    </p>
+                    <p>
+                        My academic and project work has given me hands-on experience and a comprehensive understanding of the entire product lifecycle, from hardware 
+                        integration to software deployment. Designing and working on projects with different components has honed my ability to collaborate effectively 
+                        with diverse technical teams. I genuinely enjoy diving into unfamiliar systems, asking questions, and figuring things out. I’ve also had experience 
+                        mentoring and collaborating in team settings, so I understand how to communicate well and contribute to a shared goal. I’m eager to learn, contribute, 
+                        and grow alongside all the people.
+                    </p>
+                </div>
+
+                <h2 class="text-3xl font-bold border-b border-primary pb-3 mb-6">Key Skills & Coursework</h2>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3">Programming & Tools</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-pill">Python (OOP, AI, ML)</span>
+                    <span class="skill-pill">C/C++ (Systems)</span>
+                    <span class="skill-pill">Java (Backend)</span>
+                    <span class="skill-pill">JavaScript / React / Node.js</span>
+                    <span class="skill-pill">Shell Script (Unix/Linux)</span>
+                    <span class="skill-pill">HTML/CSS</span>
+                    <span class="skill-pill">Git (Version Control)</span>
+                    <span class="skill-pill">MongoDB / NoSQL</span>
+                    <span class="skill-pill">Google Cloud / Docker</span>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3">Relevant Coursework Focus</h3>
+                <div class="text-gray-400 space-y-2 text-sm ml-4">
+                    <p>• <strong>Big Data Analytics</strong>: Machine learning, deep learning, and advanced LLM concepts (RAG, In-context learning, Reasoning).</p>
+                    <p>• <strong>Computer System Security</strong>: Web, software, and machine learning security vulnerabilities, attacks, and defense strategies.</p>
+                    <p>• <strong>Operating Systems</strong>: Kernel structure, memory management, synchronization, and distributed systems.</p>
+                    <p>• <strong>Artificial Intelligence</strong>: Heuristic search, natural language processing, and Bayesian networks.</p>
+                </div>
+                
+                <h2 class="text-3xl font-bold border-b border-primary pb-3 mb-6 mt-10">Education</h2>
+
+                <!-- Education Item 1 -->
+                <div class="mb-4 p-4 bg-gray-900/50 rounded-lg border-l-4 border-primary">
+                    <h3 class="text-xl font-semibold text-white">Master of Science, Computer Science</h3>
+                    <p class="text-secondary text-lg">University of California, Los Angeles (UCLA)</p>
+                    <p class="text-sm text-gray-400 mt-1">Expected Graduation: December 2026</p>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="mb-4 p-4 bg-gray-900/50 rounded-lg border-l-4 border-secondary">
+                    <h3 class="text-xl font-semibold text-white">Bachelor of Science, Computer Science</h3>
+                    <p class="text-secondary text-lg">University of California, Los Angeles (UCLA)</p>
+                    <p class="text-sm text-gray-400 mt-1">Graduation: December 2024 &bull; <strong>GPA: 3.7</strong></p>
+                </div>
+
+
+            </section>
+
+            <!-- WORK EXPERIENCE Tab Content -->
+            <section id="experience-tab" class="tab-content hidden">
+                <h2 class="text-3xl font-bold border-b border-primary pb-3 mb-6">Professional Experience</h2>
+
+                <!-- Experience Item 1: Peer Advisor (Most Recent) -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-primary hover:shadow-2xl hover:border-t-primary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Peer Advisor</h3>
+                    <p class="text-secondary text-lg">Office of Academic and Student Affairs, UCLA · Part-time</p>
+                    <p class="text-sm text-gray-400 mt-2">Aug 2025 - Present · Los Angeles, CA · On-site</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Advise undergraduate engineering students on curriculum planning, course selection, enrollment policies, and graduate school pathways.</li>
+                        <li>Enhance student access to academic resources by fostering a supportive and informed advising environment.</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience Item 2: Learning Assistant & Mentor -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-secondary hover:shadow-2xl hover:border-t-secondary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Learning Assistant & Mentor</h3>
+                    <p class="text-secondary text-lg">Engineering Transfer Center, UCLA · Part-time</p>
+                    <p class="text-sm text-gray-400 mt-2">Aug 2024 - Dec 2024 · Los Angeles, CA · Hybrid</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Supported Classroom Bootcamp lectures, hosted discussion sessions, and led mini-lessons on key topics of <strong>CS32</strong> (object-oriented design of data structures and algorithm analysis) for incoming engineering transfer students.</li>
+                        <li>Hosted weekly office hours to provide tutoring for CS upper-division courses.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3: Basic Training Instructor & Hackathon Mentor -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-primary hover:shadow-2xl hover:border-t-primary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Basic Training Instructor & Hackathon Mentor</h3>
+                    <p class="text-secondary text-lg">Engineering Transfer Center, UCLA · Part-time</p>
+                    <p class="text-sm text-gray-400 mt-2">Apr 2024 - Aug 2024 · Los Angeles, CA · Hybrid</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Designed and delivered interactive workshops on <strong>Python</strong> and <strong>Object-Oriented Programming</strong>.</li>
+                        <li>Led the design and prototyping of an exploration rover using <strong>Raspberry Pi</strong>, <strong>React</strong>, <strong>MQTT (HiveMQ)</strong>, sensors, and mechanical arms for proof-of-concept testing.</li>
+                        <li>Mentored 13 student teams through rover design and debugging, emphasizing the engineering process and hands-on problem solving.</li>
+                        <li>Coordinated a 48-hour in-person hackathon, enabling students to apply workshop skills to real-world engineering challenges.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 4: Student Clerk -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-secondary hover:shadow-2xl hover:border-t-secondary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Student Clerk</h3>
+                    <p class="text-secondary text-lg">University of California, Los Angeles · Part-time</p>
+                    <p class="text-sm text-gray-400 mt-2">Sep 2022 - Dec 2024 · Los Angeles, CA · On-site</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Maintained and updated the ETC websites.</li>
+                        <li>Developed and implemented events and activities to support UCLA engineering transfer students.</li>
+                        <li>Provided general office support to the ETC Director by acquiring and processing data from reports.</li>
+                    </ul>
+                </div>
+
+                <!-- NEW: Experience Item 5: Manufacturing Technician -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-primary hover:shadow-2xl hover:border-t-primary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Manufacturing Technician</h3>
+                    <p class="text-secondary text-lg">FormFactor Inc. · Full-time</p>
+                    <p class="text-sm text-gray-400 mt-2">May 2019 - Sep 2021 · San Jose, CA · On-site</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Operated <strong>Scanning Electron Microscope (SEM)</strong> to inspect probe cards and report issues to the engineering team.</li>
+                        <li>Performed troubleshooting for electrical tests (<strong>ProbeWorx300</strong>) of probe cards, and problem-solving for questionable performance.</li>
+                        <li>Operated silicon wafer etching system for lithography and develop of silicon wafers.</li>
+                    </ul>
+                </div>
+                
+                <!-- NEW: Experience Item 6: Testing Technician -->
+                <div class="mb-8 p-6 bg-gray-900 rounded-lg shadow-xl border-t-4 border-secondary hover:shadow-2xl hover:border-t-secondary/80 transition duration-300">
+                    <h3 class="text-2xl font-semibold text-white">Testing Technician</h3>
+                    <p class="text-secondary text-lg">DT Research, Inc. · Full-time</p>
+                    <p class="text-sm text-gray-400 mt-2">May 2018 - May 2019 · San Jose, CA · On-site</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                        <li>Tested tablets and computers with both software and manual operations to assure quality before shipping.</li>
+                        <li>Updated testing software based on the model number and customer needs.</li>
+                        <li>Upgraded information on computers by coding, including EC code, ECN, <strong>BIOS</strong>, etc.</li>
+                    </ul>
+                </div>
+
+
+            </section>
+
+            <!-- PROJECTS Tab Content -->
+            <section id="projects-tab" class="tab-content hidden">
+                <h2 class="text-3xl font-bold border-b border-primary pb-3 mb-6">Featured Technical Projects</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <!-- Project Item 1: Travel Agency Platform -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-semibold text-white">Travel Agency Platform (AI Itinerary Generator)</h3>
+                        <p class="text-sm text-secondary mb-3">Tech Stack: React, Appwrite, Gemini AI, Tailwind CSS, Syncfusion</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                            <li>Built a dynamic, full-stack travel agency web platform featuring both a public site and an admin dashboard.</li>
+                            <li>Developed an AI-powered itinerary generator leveraging Gemini AI to customize trips by country, style, and interests.</li>
+                            <li>Enabled trip booking, user authentication, and secure data management via Appwrite backend.</li>
+                            <li>Created an admin dashboard with interactive charts, analytics, trip and user management using Syncfusion.</li>
+                            <li>Implemented responsive design, modular components, and scalable architecture for smooth UX across devices.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Project Item 2: Scalable Server and RESTful API Development -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-semibold text-white">Scalable Server and RESTful API (Generative Image)</h3>
+                        <p class="text-sm text-secondary mb-3">Tech Stack: C++, MongoDB, Python (Flask), Google Cloud, Docker, Dall-E 3</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                            <li>Built a high-performance generative AI-powered image server using C++ and Python (Flask).</li>
+                            <li>Designed a Client-Server protocol & API to integrate with the Dall-E 3 model, utilizing MongoDB for persistent data storage.</li>
+                            <li>Deployed the scalable server on Google Cloud with auto-scaling and Docker for containerization, and set up monitoring and logging for performance optimization.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Project Item 3: Corkboard Web Application -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-semibold text-white">Corkboard: Communal Fridge Space Management</h3>
+                        <p class="text-sm text-secondary mb-3">Tech Stack: React, Node.js, NoSQL</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                            <li>Designed a web application to help users plan for inventory for groups, using NoSQL database, React, and Node.js.</li>
+                            <li>Developed a messaging board function for each group that allows members to interact with each other.</li>
+                            <li>Created features that enable users to check the group calendar in the database, and check current grocery prices with an external API.</li>
+                        </ul>
+                    </div>
+
+                    <!-- NEW Project Item 4: Block-E the Dancing Robot -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-semibold text-white">Block-E the Dancing Robot (2nd Place, HAcK 2022)</h3>
+                        <p class="text-sm text-secondary mb-3">Tech Stack: C++ (Arduino), Java (Processing), ESP32, SolidWorks</p>
+                        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-300 ml-4">
+                            <li>Designed a robot capable of carrying a payload through a field of play, dumping payload, and dancing in a 48-hour HAcK technical competition.</li>
+                            <li>Designed robot arm prototypes in CAD (SolidWorks), assembled the Block-E, and tested prototypes for stable outcomes.</li>
+                            <li>Programmed in C++ (Arduino) to control motors/servos for wheel/arm motions, change LCD screen displays for facial expressions, and develop a dance function for specific music rhythms.</li>
+                            <li>Programmed in Java (Processing) and used ESP32 to read inputs from keyboard and set up a wireless Bluetooth connection for remote controls.</li>
+                            <li>Submitted design review presentation and prototype for HAcK 2022 competition, and won 2nd place overall.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-gray-500 text-sm p-4">
+            &copy; <span id="current-year"></span> Jaelyn Fan. Built with Tailwind CSS.
+        </footer>
+
+    </div>
+
+    <script>
+        // Get the current year for the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // JavaScript for Tab Switching
+        function showTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
+
+            // Deactivate all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active-tab');
+            });
+
+            // Show the selected tab content
+            const selectedContent = document.getElementById(tabId + '-tab');
+            selectedContent.classList.remove('hidden');
+            selectedContent.classList.add('block');
+            
+            // Activate the clicked button
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active-tab');
+
+            // Scroll the content area to the top when switching tabs
+            document.getElementById('content-container').scrollTop = 0;
+        }
+
+        // Add CSS definitions for tab buttons via JS for easier maintenance
+        const style = document.createElement('style');
+        style.textContent = `
+            .tab-button {
+                @apply flex-1 py-3 px-4 text-center text-sm sm:text-base font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-none;
+            }
+            .active-tab {
+                @apply bg-primary text-white shadow-md;
+            }
+            .skill-pill {
+                @apply px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium border border-secondary;
+            }
+            .project-card {
+                /* Add subtle hover/reaction effect */
+                @apply p-6 bg-gray-900 rounded-xl shadow-xl hover:shadow-primary/50 hover:border-primary/50 transition duration-300 border border-gray-700 hover:scale-[1.01];
+            }
+            .project-link {
+                @apply inline-flex items-center text-primary hover:text-secondary font-medium transition duration-300;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize the page to show the 'home' tab on load
+        window.onload = () => {
+             // Ensure initial tab styling is applied
+             showTab('home');
+        };
+
+    </script>
+</body>
 </html>
-
-
-
